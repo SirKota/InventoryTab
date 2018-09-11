@@ -51,6 +51,13 @@ namespace InventoryTab{
         //Chached list of all the corpses found
         private List<Corpse> _corpses = new List<Corpse>();
 
+        private List<Thing> _things;
+        private List<Slot> _slots;
+
+        //TODO: see if removing this will efect performance
+        private float _timer;
+        private float _itemSearchInterval = 5f;
+
         public MainTabWindow_Inventory() {
 
         }
@@ -68,6 +75,8 @@ namespace InventoryTab{
 
         public override void DoWindowContents(Rect inRect) {
             base.DoWindowContents(inRect);
+            _timer -= Time.deltaTime;
+
             //Cache the font and anchor before changing it, so 
             //later we can set it back to what it was before.
             GameFont fontBefore = Text.Font;
@@ -75,15 +84,23 @@ namespace InventoryTab{
 
             //Clear the cached corpses
             _corpses.Clear();
-            //Cach all items based on options
-            List<Thing> itemThings = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _searchMap, _searchPawns);
+
+            
+            if (_timer < 0) {
+                Log.Message("called");
+                //Cache all items based on options
+                _things = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _searchMap, _searchPawns);
+                _slots = SortSlotsWithCategory(CombineThings(_things.ToArray()), _currentTab);
+
+                _timer = _itemSearchInterval;
+            }
 
             //Draw the header; options, search and how many items were found
-            DrawHeader(inRect, itemThings);
+            DrawHeader(inRect, _things.Count);
             //Draws the tabs
             DrawTabs(inRect);
             //Draw all the items based on tabs and options
-            DrawMainRect(inRect, itemThings.ToArray());
+            DrawMainRect(inRect, _slots);
 
             //Reset the font and anchor after we are done drawing all our stuff
             Text.Font = fontBefore;
@@ -91,11 +108,11 @@ namespace InventoryTab{
 
         }
 
-        private void DrawHeader(Rect inRect, List<Thing> itemThings) {
+        private void DrawHeader(Rect inRect, int itemCount) {
             //Draw a label for all the items found
             Rect label = new Rect(0, 0, 256, 128);
             Text.Font = GameFont.Small;
-            Widgets.Label(label, "Total found items: " + itemThings.Count);
+            Widgets.Label(label, "Total found items: " + itemCount);
 
             //Draw the option for searching the whole map
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -129,17 +146,17 @@ namespace InventoryTab{
             List<TabRecord> tabs = new List<TabRecord>();
 
             //Creating all the tabs, we have to reCreate all these at runtime because they don't update
-            TabRecord tabRec_All = new TabRecord("All", delegate () { _currentTab = Tabs.All; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.All);
-            TabRecord tabRec_Foods = new TabRecord("Foods", delegate () { _currentTab = Tabs.Foods; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Foods);
-            TabRecord tabRec_Manufactured = new TabRecord("Manfactured", delegate () { _currentTab = Tabs.Manufactured; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Manufactured);
-            TabRecord tabRec_RawResources = new TabRecord("Raw Resources", delegate () { _currentTab = Tabs.RawResources; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.RawResources);
-            TabRecord tabRec_Items = new TabRecord("Items", delegate () { _currentTab = Tabs.Items; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Items);
+            TabRecord tabRec_All = new TabRecord("All", delegate ()                     { TabClick(Tabs.All); }, _currentTab == Tabs.All);
+            TabRecord tabRec_Foods = new TabRecord("Foods", delegate ()                 { TabClick(Tabs.Foods); }, _currentTab == Tabs.Foods);
+            TabRecord tabRec_Manufactured = new TabRecord("Manfactured", delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
+            TabRecord tabRec_RawResources = new TabRecord("Raw Resources", delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
+            TabRecord tabRec_Items = new TabRecord("Items", delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
 
-            TabRecord tabRec_Weapon = new TabRecord("Weapon", delegate () { _currentTab = Tabs.Weapons; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Weapons);
-            TabRecord tabRec_Apperal = new TabRecord("Apperal", delegate () { _currentTab = Tabs.Apperal; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Apperal);
-            TabRecord tabRec_Buildings = new TabRecord("Buildings", delegate () { _currentTab = Tabs.Building; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Building);
-            TabRecord tabRec_Chunks = new TabRecord("Chunks", delegate () { _currentTab = Tabs.Chunks; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Chunks);
-            TabRecord tabRec_Corpses = new TabRecord("Corpses", delegate () { _currentTab = Tabs.Corpses; _scrollPosition = Vector2.zero; }, _currentTab == Tabs.Corpses);
+            TabRecord tabRec_Weapon = new TabRecord("Weapon", delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
+            TabRecord tabRec_Apperal = new TabRecord("Apperal", delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
+            TabRecord tabRec_Buildings = new TabRecord("Buildings", delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
+            TabRecord tabRec_Chunks = new TabRecord("Chunks", delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
+            TabRecord tabRec_Corpses = new TabRecord("Corpses", delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);
 
             //Add them to the list
             tabs.Add(tabRec_All);
@@ -158,13 +175,14 @@ namespace InventoryTab{
             TabDrawer.DrawTabs(tabRect, tabs, 2);
         }
 
-        private void DrawMainRect(Rect inRect, Thing[] itemThings) {
+        private void DrawMainRect(Rect inRect, List<Slot> slots) {
             Rect mainRect = new Rect(inRect.x, inRect.y + 37f + (_slotHeight * 3), inRect.width, inRect.height - 37f);
             //Creats slots for all the items; combines, sorts into catergorys and checks for searches all in one line 
-            List<Slot> categorizedSlots = GetSearchForList( SortSlotsWithCategory( CombineThings(itemThings), _currentTab));
+            List<Slot> categorizedSlots = GetSearchForList(slots);
             //Sort based on market value
             categorizedSlots.Sort();
 
+            
             //This is for the scrolling
             Rect viewRect = new Rect(0, 0, mainRect.width - 16f, categorizedSlots.Count * _slotHeight + 6f + (_slotHeight * 3));
             Widgets.BeginScrollView(mainRect, ref _scrollPosition, viewRect);
@@ -176,17 +194,11 @@ namespace InventoryTab{
                     if (i % 2 == 1) Widgets.DrawLightHighlight(slotRect);
 
                     Widgets.DrawHighlightIfMouseover(slotRect);
-
-                    if (Widgets.ButtonInvisible(slotRect) == true) {
-                        //Handles clicking of the slot, this was a bitch to get working correctly
-                        HandleClick(categorizedSlots[i].groupedThings);
-                    }
                     
                     //Draw the slot
                     DrawThingSlot(categorizedSlots[i], slotRect);
                 }
             }
-
             Widgets.EndScrollView();
         }
 
@@ -212,7 +224,18 @@ namespace InventoryTab{
                 thingLabel = thing.Label;
             }
 
+            if (Widgets.ButtonInvisible(labelRect) == true){
+                //Handles clicking of the slot, this was a bitch to get working correctly
+                HandleClick(slot.groupedThings);
+            }
+
             Widgets.Label(labelRect, thingLabel);
+        }
+
+        private void TabClick(Tabs tab) {
+            _currentTab = tab;
+            _scrollPosition = Vector2.zero;
+            _timer = 0;
         }
 
         //Disclaimer i hate how i had to handle the corpses in this method

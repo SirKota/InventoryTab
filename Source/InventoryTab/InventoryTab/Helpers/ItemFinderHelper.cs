@@ -14,7 +14,7 @@ namespace InventoryTab.Helpers
         public static List<Thing> GetAllMapItems(Map map, bool searchWholeMap = false, bool searchPawns = false){
             List<Thing> results = new List<Thing>();
             List<Thing> allThings = map.listerThings.AllThings;
-            
+
             for (int i = 0; i < allThings.Count; i++){
                 Thing thing = allThings[i];
 

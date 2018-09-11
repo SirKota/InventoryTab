@@ -24,7 +24,8 @@ namespace InventoryTab.Helpers
             //if the thing list only has one thing in it we don't need to
             // do the loop code
             if (things.Length == 1) {
-                CameraJumper.TryJump(things[0]);
+                CameraJumper.TryJumpAndSelect(things[0]);
+
                 //Resets the variable used for loop jumping
                 ResetTracking(things[0]);
                 return;
@@ -33,7 +34,7 @@ namespace InventoryTab.Helpers
             //if the thing currently looping is not the same as the last thing
             //then avoid the looping code and jump to the first in the list
             if (_lastJumpedThing != things[0]) {
-                CameraJumper.TryJump(things[0]);
+                CameraJumper.TryJumpAndSelect(things[0]);
                 //Resets the variable used for loop jumping
                 ResetTracking(things[0]);
                 return;
@@ -47,7 +48,7 @@ namespace InventoryTab.Helpers
                 _jumpIndex = 0;
             }
 
-            CameraJumper.TryJump(things[_jumpIndex]);
+            CameraJumper.TryJumpAndSelect(things[_jumpIndex]);
         }
 
         private static void ResetTracking(Thing thing) {

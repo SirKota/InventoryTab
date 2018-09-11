@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>InventoryTab</name>
+  <author>SirKota</author>
+  <url></url>
+  <targetVersion>0.19.2009</targetVersion>
+  <description>Adds a new tab to view all of the colonies stockpiles at once! With options to see all visible items in the map and the inventories of colonist, prisoners and the dead!</description>
+</ModMetaData>

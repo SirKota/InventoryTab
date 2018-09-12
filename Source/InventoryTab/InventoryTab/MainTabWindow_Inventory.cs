@@ -87,7 +87,6 @@ namespace InventoryTab{
 
             
             if (_timer < 0) {
-                Log.Message("called");
                 //Cache all items based on options
                 _things = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _searchMap, _searchPawns);
                 _slots = SortSlotsWithCategory(CombineThings(_things.ToArray()), _currentTab);

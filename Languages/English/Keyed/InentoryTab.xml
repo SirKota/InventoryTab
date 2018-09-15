@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!--Header Labels-->
+	<TotalFound>Total found items</TotalFound>
+	
+	<SearchMap>Search whole map</SearchMap>
+	<SearchMapToolTip>Search the whole map for items.</SearchMapToolTip>
+	
+	<SearchPawns>Search pawns</SearchPawns>
+	<SearchPawnsToolTip>Search the pawns inventorys. Includes colonist, prisoners and the dead.</SearchPawnsToolTip>
+	
+	<!--Tab Labels-->
+	<All>All</All>
+	<Foods>Foods</Foods>
+	<Manufactured>Manufactured</Manufactured>
+	<RawResources>Raw Resources</RawResources>
+	<Items>Items</Items>
+
+	<Weapons>Weapons</Weapons>
+	<Apparel>Apparel</Apparel>
+	<Buildings>Buildings</Buildings>
+	<Chunks>Chunks</Chunks>
+	<Corpses>Corpses</Corpses>
+</LanguageData>

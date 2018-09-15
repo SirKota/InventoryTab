@@ -111,26 +111,26 @@ namespace InventoryTab{
             //Draw a label for all the items found
             Rect label = new Rect(0, 0, 256, 128);
             Text.Font = GameFont.Small;
-            Widgets.Label(label, "Total found items: ".Translate() + itemCount);
+            Widgets.Label(label, "TotalFound".Translate()+ ": " + itemCount);
 
             //Draw the option for searching the whole map
             Text.Anchor = TextAnchor.MiddleLeft;
             Rect rectStockpile = new Rect(inRect.width - 223, 0, 128, 32);
-            Widgets.Label(rectStockpile, "Search whole map".Translate());
+            Widgets.Label(rectStockpile, "SearchMap".Translate());
             //This rect is created for the checkbox so when you mouse over it, it tells you what it does
             Rect checkBoxRect = new Rect(rectStockpile.x + 120, rectStockpile.y, 24, 24);
             Widgets.Checkbox(checkBoxRect.x, checkBoxRect.y, ref _searchMap);
             //add a tooltip for the searchMap option
-            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("Search the whole map for items.".Translate()));
+            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("SearchMapToolTip".Translate()));
 
             //Draw the option for searching the pawns
             Rect rectPawn = new Rect(inRect.width - 223, 25, 128, 32);
-            Widgets.Label(rectPawn, "Search pawns".Translate());
+            Widgets.Label(rectPawn, "SearchPawns".Translate());
             //This rect is created for the checkbox so when you mouse over it, it tells you what it does
             checkBoxRect = new Rect(rectPawn.x + 120, rectPawn.y, 24, 24);
             Widgets.Checkbox(checkBoxRect.x, checkBoxRect.y, ref _searchPawns);
             //add a tooltip for the searchMap option
-            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("Search the pawns inventorys. Includes colonist, prisoners and the dead.".Translate()));
+            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("SearchPawnsToolTip".Translate()));
 
             //Draw the search bar
             Rect searchOptions = new Rect(0, 25, 200, 25);
@@ -147,12 +147,12 @@ namespace InventoryTab{
             //Creating all the tabs, we have to reCreate all these at runtime because they don't update
             TabRecord tabRec_All = new TabRecord("All".Translate(), delegate ()                     { TabClick(Tabs.All); }, _currentTab == Tabs.All);
             TabRecord tabRec_Foods = new TabRecord("Foods".Translate(), delegate ()                 { TabClick(Tabs.Foods); }, _currentTab == Tabs.Foods);
-            TabRecord tabRec_Manufactured = new TabRecord("Manfactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
-            TabRecord tabRec_RawResources = new TabRecord("Raw Resources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
+            TabRecord tabRec_Manufactured = new TabRecord("Manufactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
+            TabRecord tabRec_RawResources = new TabRecord("RawResources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
             TabRecord tabRec_Items = new TabRecord("Items".Translate(), delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
 
-            TabRecord tabRec_Weapon = new TabRecord("Weapon".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
-            TabRecord tabRec_Apperal = new TabRecord("Apperal".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
+            TabRecord tabRec_Weapon = new TabRecord("Weapons".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
+            TabRecord tabRec_Apperal = new TabRecord("Apparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
             TabRecord tabRec_Buildings = new TabRecord("Buildings".Translate(), delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
             TabRecord tabRec_Chunks = new TabRecord("Chunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
             TabRecord tabRec_Corpses = new TabRecord("Corpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);
@@ -228,7 +228,7 @@ namespace InventoryTab{
                 HandleClick(slot.groupedThings);
             }
 
-            Widgets.Label(labelRect, thingLabel.Translate());
+            Widgets.Label(labelRect, thingLabel);
         }
 
         private void TabClick(Tabs tab) {

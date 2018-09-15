@@ -152,7 +152,7 @@ namespace InventoryTab{
             TabRecord tabRec_Items = new TabRecord("Items".Translate(), delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
 
             TabRecord tabRec_Weapon = new TabRecord("Weapons".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
-            TabRecord tabRec_Apperal = new TabRecord("Apparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
+            TabRecord tabRec_Apperal = new TabRecord("TabsApparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
             TabRecord tabRec_Buildings = new TabRecord("Buildings".Translate(), delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
             TabRecord tabRec_Chunks = new TabRecord("Chunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
             TabRecord tabRec_Corpses = new TabRecord("Corpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);

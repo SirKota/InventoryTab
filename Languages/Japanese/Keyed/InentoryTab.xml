@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!--Header Labels-->
+  <TotalFound>アイテムの検索結果</TotalFound>
+
+  <SearchMap>マップ全体を検索</SearchMap>
+  <SearchMapToolTip>このマップ全体からアイテムを検索します。</SearchMapToolTip>
+
+  <SearchPawns>人物を検索</SearchPawns>
+  <SearchPawnsToolTip>人物の一覧から検索します。結果には入植者や囚人、死者を含みます。</SearchPawnsToolTip>
+
+  <!--Tab Labels-->
+  <All>全て</All>
+  <Foods>食糧</Foods>
+  <Manufactured>生産品</Manufactured>
+  <RawResources>未加工の資源</RawResources>
+  <Items>アイテム</Items>
+
+  <Weapons>武器</Weapons>
+  <TabsApparel>衣服</TabsApparel>
+  <Buildings>建築物</Buildings>
+  <Chunks>岩塊/鉄屑</Chunks>
+  <Corpses>死体</Corpses>
+
+</LanguageData>

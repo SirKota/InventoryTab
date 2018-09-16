@@ -11,15 +11,15 @@
 	<SearchPawnsToolTip>Search the pawns inventorys. Includes colonist, prisoners and the dead.</SearchPawnsToolTip>
 	
 	<!--Tab Labels-->
-	<All>All</All>
-	<Foods>Foods</Foods>
-	<Manufactured>Manufactured</Manufactured>
-	<RawResources>Raw Resources</RawResources>
-	<Items>Items</Items>
+	<TabAll>All</TabAll>
+	<TabFoods>Foods</TabFoods>
+	<TabManufactured>Manufactured</TabManufactured>
+	<TabRawResources>Raw Resources</TabRawResources>
+	<TabItems>Items</TabItems>
 
-	<Weapons>Weapons</Weapons>
-	<TabsApparel>Apparel</TabsApparel>
-	<Buildings>Buildings</Buildings>
-	<Chunks>Chunks</Chunks>
-	<Corpses>Corpses</Corpses>
+	<TabWeapons>Weapons</TabWeapons>
+	<TabApparel>Apparel</TabApparel>
+	<TabBuildings>Buildings</TabBuildings>
+	<TabChunks>Chunks</TabChunks>
+	<TabCorpses>Corpses</TabCorpses>
 </LanguageData>

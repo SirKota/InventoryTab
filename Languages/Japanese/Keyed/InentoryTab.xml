@@ -11,16 +11,16 @@
   <SearchPawnsToolTip>人物の一覧から検索します。結果には入植者や囚人、死者を含みます。</SearchPawnsToolTip>
 
   <!--Tab Labels-->
-  <All>全て</All>
-  <Foods>食糧</Foods>
-  <Manufactured>生産品</Manufactured>
-  <RawResources>未加工の資源</RawResources>
-  <Items>アイテム</Items>
+  <TabAll>全て</TabAll>
+  <TabFoods>食糧</TabFoods>
+  <TabManufactured>生産品</TabManufactured>
+  <TabRawResources>未加工の資源</TabRawResources>
+  <TabItems>アイテム</TabItems>
 
-  <Weapons>武器</Weapons>
-  <TabsApparel>衣服</TabsApparel>
-  <Buildings>建築物</Buildings>
-  <Chunks>岩塊/鉄屑</Chunks>
-  <Corpses>死体</Corpses>
+  <TabWeapons>武器</TabWeapons>
+  <TabTabsApparel>衣服</TabTabsApparel>
+  <TabBuildings>建築物</TabBuildings>
+  <TabChunks>岩塊/鉄屑</TabChunks>
+  <TabCorpses>死体</TabCorpses>
 
 </LanguageData>

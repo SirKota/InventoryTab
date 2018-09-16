@@ -145,17 +145,17 @@ namespace InventoryTab{
             List<TabRecord> tabs = new List<TabRecord>();
 
             //Creating all the tabs, we have to reCreate all these at runtime because they don't update
-            TabRecord tabRec_All = new TabRecord("All".Translate(), delegate ()                     { TabClick(Tabs.All); }, _currentTab == Tabs.All);
-            TabRecord tabRec_Foods = new TabRecord("Foods".Translate(), delegate ()                 { TabClick(Tabs.Foods); }, _currentTab == Tabs.Foods);
-            TabRecord tabRec_Manufactured = new TabRecord("Manufactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
-            TabRecord tabRec_RawResources = new TabRecord("RawResources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
-            TabRecord tabRec_Items = new TabRecord("Items".Translate(), delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
+            TabRecord tabRec_All = new TabRecord("TabAll".Translate(), delegate ()                     { TabClick(Tabs.All); }, _currentTab == Tabs.All);
+            TabRecord tabRec_Foods = new TabRecord("TabFoods".Translate(), delegate ()                 { TabClick(Tabs.Foods); }, _currentTab == Tabs.Foods);
+            TabRecord tabRec_Manufactured = new TabRecord("TabManufactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
+            TabRecord tabRec_RawResources = new TabRecord("TabRawResources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
+            TabRecord tabRec_Items = new TabRecord("TabItems".Translate(), delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
 
-            TabRecord tabRec_Weapon = new TabRecord("Weapons".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
-            TabRecord tabRec_Apperal = new TabRecord("TabsApparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
-            TabRecord tabRec_Buildings = new TabRecord("Buildings".Translate(), delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
-            TabRecord tabRec_Chunks = new TabRecord("Chunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
-            TabRecord tabRec_Corpses = new TabRecord("Corpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);
+            TabRecord tabRec_Weapon = new TabRecord("TabWeapons".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
+            TabRecord tabRec_Apperal = new TabRecord("TabApparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
+            TabRecord tabRec_Buildings = new TabRecord("TabBuildings".Translate(), delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
+            TabRecord tabRec_Chunks = new TabRecord("TabChunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
+            TabRecord tabRec_Corpses = new TabRecord("TabCorpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);
 
             //Add them to the list
             tabs.Add(tabRec_All);

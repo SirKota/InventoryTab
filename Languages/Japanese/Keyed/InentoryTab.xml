@@ -18,7 +18,7 @@
   <TabItems>アイテム</TabItems>
 
   <TabWeapons>武器</TabWeapons>
-  <TabTabsApparel>衣服</TabTabsApparel>
+  <TabApparel>衣服</TabApparel>
   <TabBuildings>建築物</TabBuildings>
   <TabChunks>岩塊/鉄屑</TabChunks>
   <TabCorpses>死体</TabCorpses>

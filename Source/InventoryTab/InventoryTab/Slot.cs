@@ -43,8 +43,8 @@ namespace InventoryTab
                     
                     Corpse a = thingInSlot as Corpse;
                     Corpse b = other.thingInSlot as Corpse;
-
-                    if (a.InnerPawn.def.race.Humanlike == true && b.InnerPawn.def.race.Humanlike == true) {
+                    
+                    if (a != null && b != null && a.InnerPawn.def.race.Humanlike == true && b.InnerPawn.def.race.Humanlike == true) {
                         return string.Compare(a.InnerPawn.Label, b.InnerPawn.Label, StringComparison.CurrentCulture);
                     }
 

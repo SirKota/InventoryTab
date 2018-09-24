@@ -219,7 +219,7 @@ namespace InventoryTab{
             //Set the label for the thing, we use custom stacksize so we have to set it here
             string thingLabel = thing.LabelCapNoCount + " (x" + slot.stackSize + ")";
             //If item is a humanlike corpse we want to display their name
-            if (slot.tab == Tabs.Corpses && (thing as Corpse).InnerPawn.def.race.Humanlike == true){
+            if (slot.tab == Tabs.Corpses && (thing as Corpse) != null && (thing as Corpse).InnerPawn.def.race.Humanlike == true){
                 thingLabel = thing.Label;
             }
 
@@ -307,10 +307,13 @@ namespace InventoryTab{
                 //If a thing is a corpse then we need to added it to the _corpse
                 //so later we can check it against pawn
                 if (things[i].def.IsWithinCategory(ThingCategoryDefOf.Corpses)) {
-                    tId = things[i].Label;
-
                     Corpse cor = things[i] as Corpse;
-                    if (cor.InnerPawn.def.race.Humanlike == true){
+
+                    //Had to do a check to make sure the corpse is actually a corpse,
+                    //Beacause mods like "Thanks for all the Fish" have things that are 
+                    //catergorized as corpses but arent actually corpsese...
+                    if (cor != null && cor.InnerPawn.def.race.Humanlike == true){
+                        
                         _corpses.Add(things[i] as Corpse);
                     }
                 }

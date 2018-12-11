@@ -36,15 +36,12 @@ namespace InventoryTab{
         }
 
         //Used to define the height of the slot for the items
-        private float _slotHeight = 32;
+        private const float _slotHeight = 32;
         //Hold the position of the scroll
         private Vector2 _scrollPosition;
         //What tab is currently being viewed
         private Tabs _currentTab = Tabs.All;
 
-        //Options
-        private bool _searchMap = false;
-        private bool _searchPawns = false;
         //Used for searching items
         private string _searchFor;
 
@@ -54,12 +51,15 @@ namespace InventoryTab{
         private List<Thing> _things;
         private List<Slot> _slots;
 
-        //TODO: see if removing this will efect performance
         private float _timer;
-        private float _itemSearchInterval = 5f;
+
+        private bool _dirty = false;
+
+        //A holder for all the options
+        private OptionsHelper _options;
 
         public MainTabWindow_Inventory() {
-
+            this._options = new OptionsHelper(this);
         }
 
         public override void PostOpen() {
@@ -71,6 +71,8 @@ namespace InventoryTab{
             //Set it so it's in the map view, no point seeing the items you have in world view
             //plus the selector might not work right in planet view(untested)
             Find.World.renderer.wantedMode = RimWorld.Planet.WorldRenderMode.None;
+            
+            UpdateThings();
         }
 
         public override void DoWindowContents(Rect inRect) {
@@ -84,15 +86,14 @@ namespace InventoryTab{
 
             //Clear the cached corpses
             _corpses.Clear();
-
             
-            if (_timer < 0) {
+            if (_options.AutoUpdate == true && _timer < 0) {
                 //Cache all items based on options
-                _things = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _searchMap, _searchPawns);
-                _slots = SortSlotsWithCategory(CombineThings(_things.ToArray()), _currentTab);
-
-                _timer = _itemSearchInterval;
+                _dirty = true;
+                _timer = _options.AutoUpdateTimeInterval;
             }
+
+            if (_dirty == true) { UpdateThings(); }
 
             //Draw the header; options, search and how many items were found
             DrawHeader(inRect, _things.Count);
@@ -104,37 +105,53 @@ namespace InventoryTab{
             //Reset the font and anchor after we are done drawing all our stuff
             Text.Font = fontBefore;
             Text.Anchor = anchorBefore;
+        }
 
+        public override void PostClose(){
+            if (Find.WindowStack.IsOpen<Dialog_Options>() == true){
+                Find.WindowStack.TryRemove(typeof(Dialog_Options));
+            }
+
+            base.PostClose();
+        }
+
+        public void UpdateThings() {
+            //Do an inital find of all the items on the map based on the options
+            _things = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _options);
+            _slots = SortSlotsWithCategory(CombineThings(_things.ToArray()), _currentTab);
+            _dirty = false;
+        }
+
+        public void Dirty() {
+            _dirty = true;
         }
 
         private void DrawHeader(Rect inRect, int itemCount) {
             //Draw a label for all the items found
             Rect label = new Rect(0, 0, 256, 128);
             Text.Font = GameFont.Small;
-            Widgets.Label(label, "TotalFound".Translate()+ ": " + itemCount);
-
-            //Draw the option for searching the whole map
-            Text.Anchor = TextAnchor.MiddleLeft;
-            Rect rectStockpile = new Rect(inRect.width - 223, 0, 128, 32);
-            Widgets.Label(rectStockpile, "SearchMap".Translate());
-            //This rect is created for the checkbox so when you mouse over it, it tells you what it does
-            Rect checkBoxRect = new Rect(rectStockpile.x + 120, rectStockpile.y, 24, 24);
-            Widgets.Checkbox(checkBoxRect.x, checkBoxRect.y, ref _searchMap);
-            //add a tooltip for the searchMap option
-            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("SearchMapToolTip".Translate()));
-
-            //Draw the option for searching the pawns
-            Rect rectPawn = new Rect(inRect.width - 223, 25, 128, 32);
-            Widgets.Label(rectPawn, "SearchPawns".Translate());
-            //This rect is created for the checkbox so when you mouse over it, it tells you what it does
-            checkBoxRect = new Rect(rectPawn.x + 120, rectPawn.y, 24, 24);
-            Widgets.Checkbox(checkBoxRect.x, checkBoxRect.y, ref _searchPawns);
-            //add a tooltip for the searchMap option
-            TooltipHandler.TipRegion(checkBoxRect, new TipSignal("SearchPawnsToolTip".Translate()));
-
+            Widgets.Label(label, "TotalFound".Translate() + ": " + itemCount);
             //Draw the search bar
             Rect searchOptions = new Rect(0, 25, 200, 25);
             _searchFor = Widgets.TextArea(searchOptions, _searchFor);
+
+            Rect optionsRect = new Rect(inRect.width - 25, 0, 25, 25);
+            TooltipHandler.TipRegion(optionsRect, new TipSignal("Options".Translate()));
+            if (Widgets.ButtonImage(optionsRect, ContentFinder<Texture2D>.Get("UI/settings", true)) == true) {
+                if (Find.WindowStack.IsOpen<Dialog_Options>() == true) {
+                    Find.WindowStack.TryRemove(typeof(Dialog_Options));
+                }
+                else {
+                    Find.WindowStack.Add(new Dialog_Options(_options));
+                }
+            }
+
+            Rect searchRect = new Rect(optionsRect.x - 35, 0, 25, 25);
+            TooltipHandler.TipRegion(searchRect, new TipSignal("Search".Translate()));
+            if (Widgets.ButtonImage(searchRect, ContentFinder<Texture2D>.Get("UI/search", true)) == true) {
+                _dirty = true;
+            }
+            
         }
 
         private void DrawTabs(Rect rect) {
@@ -181,7 +198,6 @@ namespace InventoryTab{
             //Sort based on market value
             categorizedSlots.Sort();
 
-            
             //This is for the scrolling
             Rect viewRect = new Rect(0, 0, mainRect.width - 16f, categorizedSlots.Count * _slotHeight + 6f + (_slotHeight * 3));
             Widgets.BeginScrollView(mainRect, ref _scrollPosition, viewRect);
@@ -234,7 +250,7 @@ namespace InventoryTab{
         private void TabClick(Tabs tab) {
             _currentTab = tab;
             _scrollPosition = Vector2.zero;
-            _timer = 0;
+            _dirty = true;
         }
 
         //Disclaimer i hate how i had to handle the corpses in this method
@@ -428,6 +444,7 @@ namespace InventoryTab{
             
             return Tabs.All;
         }
+
 
     }
 }

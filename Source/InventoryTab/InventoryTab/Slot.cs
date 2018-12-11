@@ -14,13 +14,14 @@ namespace InventoryTab
         public MainTabWindow_Inventory.Tabs tab { get; private set; }
 
         //This is all of the thing stack that was found
-        public List<Thing> groupedThings = new List<Thing>();
+        public List<Thing> groupedThings;
         public int stackSize;
         
         public Slot(Thing thing, MainTabWindow_Inventory.Tabs tab) {
             this.thingInSlot = thing;
             this.tab = tab;
 
+            this.groupedThings = new List<Thing>();
             groupedThings.Add(thing);
             this.stackSize = thing.stackCount;
         }

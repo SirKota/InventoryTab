@@ -2,13 +2,25 @@
 <LanguageData>
 
   <!--Header Labels-->
+  <!--[Core] <Options>オプション</Options>-->
+
+  <Search>強制検索</Search>
+
   <TotalFound>アイテムの検索結果</TotalFound>
+
+  <!--Settings Labels-->
+  <InventoryOptions>在庫オプション</InventoryOptions>
 
   <SearchMap>マップ全体を検索</SearchMap>
   <SearchMapToolTip>このマップ全体からアイテムを検索します。</SearchMapToolTip>
 
   <SearchPawns>人物を検索</SearchPawns>
   <SearchPawnsToolTip>人物の一覧から検索します。結果には入植者や囚人、死者を含みます。</SearchPawnsToolTip>
+
+  <AutoUpdate>自動更新</AutoUpdate>
+  <AutoUpdateToolTip>「自動更新間隔」を利用して、アイテムリストの表示を、設定した時間ごとに更新します。</AutoUpdateToolTip>
+
+  <AutoUpdateTimeInterval>自動更新間隔</AutoUpdateTimeInterval>
 
   <!--Tab Labels-->
   <TabAll>全て</TabAll>

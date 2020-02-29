@@ -67,7 +67,7 @@ namespace InventoryTab{
             //Reset this to zero, because it retains it;s position form the
             //previous time it was opened
             this._scrollPosition = Vector2.zero;
-
+            
             //Set it so it's in the map view, no point seeing the items you have in world view
             //plus the selector might not work right in planet view(untested)
             Find.World.renderer.wantedMode = RimWorld.Planet.WorldRenderMode.None;
@@ -160,20 +160,21 @@ namespace InventoryTab{
             tabRect.yMin += 120f;
 
             List<TabRecord> tabs = new List<TabRecord>();
-
+            
             //Creating all the tabs, we have to reCreate all these at runtime because they don't update
-            TabRecord tabRec_All = new TabRecord("TabAll".Translate(), delegate ()                     { TabClick(Tabs.All); }, _currentTab == Tabs.All);
-            TabRecord tabRec_Foods = new TabRecord("TabFoods".Translate(), delegate ()                 { TabClick(Tabs.Foods); }, _currentTab == Tabs.Foods);
-            TabRecord tabRec_Manufactured = new TabRecord("TabManufactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); }, _currentTab == Tabs.Manufactured);
-            TabRecord tabRec_RawResources = new TabRecord("TabRawResources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); }, _currentTab == Tabs.RawResources);
-            TabRecord tabRec_Items = new TabRecord("TabItems".Translate(), delegate ()                 {  TabClick(Tabs.Items); }, _currentTab == Tabs.Items);
+            TabRecord tabRec_All = new TabRecord("TabAll".Translate(), delegate ()                     { TabClick(Tabs.All); },             _currentTab == Tabs.All);
+            
+            TabRecord tabRec_Foods = new TabRecord("TabFoods".Translate(), delegate ()                 { TabClick(Tabs.Foods); },           _currentTab == Tabs.Foods);
+            TabRecord tabRec_Manufactured = new TabRecord("TabManufactured".Translate(), delegate ()    {  TabClick(Tabs.Manufactured); },  _currentTab == Tabs.Manufactured);
+            TabRecord tabRec_RawResources = new TabRecord("TabRawResources".Translate(), delegate ()  {  TabClick(Tabs.RawResources); },    _currentTab == Tabs.RawResources);
+            TabRecord tabRec_Items = new TabRecord("TabItems".Translate(), delegate ()                 {  TabClick(Tabs.Items); },          _currentTab == Tabs.Items);
 
-            TabRecord tabRec_Weapon = new TabRecord("TabWeapons".Translate(), delegate ()               {  TabClick(Tabs.Weapons); }, _currentTab == Tabs.Weapons);
-            TabRecord tabRec_Apperal = new TabRecord("TabApparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); }, _currentTab == Tabs.Apperal);
-            TabRecord tabRec_Buildings = new TabRecord("TabBuildings".Translate(), delegate ()         {  TabClick(Tabs.Building); }, _currentTab == Tabs.Building);
-            TabRecord tabRec_Chunks = new TabRecord("TabChunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); }, _currentTab == Tabs.Chunks);
-            TabRecord tabRec_Corpses = new TabRecord("TabCorpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); }, _currentTab == Tabs.Corpses);
-
+            TabRecord tabRec_Weapon = new TabRecord("TabWeapons".Translate(), delegate ()              {  TabClick(Tabs.Weapons); },        _currentTab == Tabs.Weapons);
+            TabRecord tabRec_Apperal = new TabRecord("TabApparel".Translate(), delegate ()             {  TabClick(Tabs.Apperal); },        _currentTab == Tabs.Apperal);
+            TabRecord tabRec_Buildings = new TabRecord("TabBuildings".Translate(), delegate ()         {  TabClick(Tabs.Building); },       _currentTab == Tabs.Building);
+            TabRecord tabRec_Chunks = new TabRecord("TabChunks".Translate(), delegate ()               { TabClick(Tabs.Chunks); },          _currentTab == Tabs.Chunks);
+            TabRecord tabRec_Corpses = new TabRecord("TabCorpses".Translate(), delegate ()             { TabClick(Tabs.Corpses); },         _currentTab == Tabs.Corpses);
+                    
             //Add them to the list
             tabs.Add(tabRec_All);
             tabs.Add(tabRec_Foods);
@@ -186,7 +187,7 @@ namespace InventoryTab{
             tabs.Add(tabRec_Buildings);
             tabs.Add(tabRec_Chunks);
             tabs.Add(tabRec_Corpses);
-
+            
             //Draw the tabs, the last argument is how many rows you want
             TabDrawer.DrawTabs(tabRect, tabs, 2);
         }

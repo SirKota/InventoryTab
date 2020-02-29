@@ -3,3 +3,7 @@ E:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\Invento
 E:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.dll
 E:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.csprojAssemblyReference.cache
 E:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.csproj.CopyComplete
+D:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.csprojAssemblyReference.cache
+D:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.dll
+D:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Assemblies\InventoryTab.dll
+D:\Games\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.csproj.CopyComplete

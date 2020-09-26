@@ -6,6 +6,7 @@
   <supportedVersions>
 	<li>1.0</li>
 	<li>1.1</li>
+	<li>1.2</li>
   </supportedVersions>
   <description>Adds a new tab to view all of the colonies stockpiles at once! With options to see all visible items on the map and the inventories of colonist, prisoners and the dead!</description>
 </ModMetaData>

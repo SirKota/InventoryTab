@@ -76,7 +76,7 @@ namespace InventoryTab{
         }
 
         public override void DoWindowContents(Rect inRect) {
-            base.DoWindowContents(inRect);
+            //base.DoWindowContents(inRect);
             _timer -= Time.deltaTime;
 
             //Cache the font and anchor before changing it, so 
@@ -234,7 +234,7 @@ namespace InventoryTab{
             labelRect.x += imageRect.width + 35;
 
             //Set the label for the thing, we use custom stacksize so we have to set it here
-            string thingLabel = thing.LabelCapNoCount + " (x" + slot.stackSize + ")";
+            string thingLabel = slot.thingId + " (x" + slot.stackSize + ")";
             //If item is a humanlike corpse we want to display their name
             if (slot.tab == Tabs.Corpses && (thing as Corpse) != null && (thing as Corpse).InnerPawn.def.race.Humanlike == true){
                 thingLabel = thing.Label;
@@ -254,7 +254,7 @@ namespace InventoryTab{
             _dirty = true;
         }
 
-        //Disclaimer i hate how i had to handle the corpses in this method
+        //Disclaimer i hate how i had to handle the corpses
         private void HandleClick(List<Thing> things) {
             
             Find.Selector.ClearSelection();
@@ -319,8 +319,8 @@ namespace InventoryTab{
             Dictionary<string, Slot> slotMap = new Dictionary<string, Slot>();
 
             for (int i = 0; i < things.Length; i++) {
-                string tId = things[i].LabelNoCount;
-
+                string tId = things[i].LabelCapNoCount.Split('(')[0].CapitalizeFirst();
+                
                 //If a thing is a corpse then we need to added it to the _corpse
                 //so later we can check it against pawn
                 if (things[i].def.IsWithinCategory(ThingCategoryDefOf.Corpses)) {
@@ -349,7 +349,7 @@ namespace InventoryTab{
                 }
 
                 //Create a new slot
-                Slot s = new Slot(things[i], AssignTab(things[i]));
+                Slot s = new Slot(things[i], tId, AssignTab(things[i]));
                 slotMap.Add(tId, s);
             }
 

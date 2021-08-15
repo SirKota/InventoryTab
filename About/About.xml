@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
+  <packageId>Kota.InventoryTab</packageId>
   <name>InventoryTab</name>
   <author>SirKota</author>
   <url>https://github.com/SirKota/InventoryTab</url>

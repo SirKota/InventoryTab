@@ -101,7 +101,7 @@ namespace InventoryTab{
             DrawTabs(inRect);
             //Draw all the items based on tabs and options
             DrawMainRect(inRect, _slots);
-
+     
             //Reset the font and anchor after we are done drawing all our stuff
             Text.Font = fontBefore;
             Text.Anchor = anchorBefore;
@@ -189,7 +189,7 @@ namespace InventoryTab{
             tabs.Add(tabRec_Corpses);
             
             //Draw the tabs, the last argument is how many rows you want
-            TabDrawer.DrawTabs(tabRect, tabs, 2);
+            TabDrawer.DrawTabs(tabRect, tabs, 2, 200);
         }
 
         private void DrawMainRect(Rect inRect, List<Slot> slots) {
@@ -246,6 +246,9 @@ namespace InventoryTab{
             }
 
             Widgets.Label(labelRect, thingLabel);
+            
+            labelRect.x += 500;
+            Widgets.Label(labelRect, thing.Label);
         }
 
         private void TabClick(Tabs tab) {

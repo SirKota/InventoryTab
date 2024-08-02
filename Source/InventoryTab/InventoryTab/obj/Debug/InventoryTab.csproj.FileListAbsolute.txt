@@ -13,3 +13,5 @@ C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\Source\
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\Assemblies\InventoryTab.dll
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\Source\InventoryTab\InventoryTab\obj\Debug\InventoryTab.csproj.CopyComplete
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\1.3\Assemblies\InventoryTab.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\1.4\Assemblies\InventoryTab.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\InventoryTab\1.5\Assemblies\InventoryTab.dll

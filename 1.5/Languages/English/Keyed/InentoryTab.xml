@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- Hearder Labels-->
+	<Options>Options</Options>
+	
+	<Search>Force Search</Search>
+	
+	<TotalFound>Total found items</TotalFound>
+	
+	<!--Settings Labels-->
+	<InventoryOptions>Inventory Options</InventoryOptions>
+
+	<SearchMap>Search whole map</SearchMap>
+	<SearchMapToolTip>Search the whole map for items.</SearchMapToolTip>
+	
+	<SearchPawns>Search pawns</SearchPawns>
+	<SearchPawnsToolTip>Search the pawns inventories. Includes colonist, prisoners, caravan animals and the dead.</SearchPawnsToolTip>
+
+	<AutoUpdate>Auto Update</AutoUpdate>
+	<AutoUpdateToolTip>Uses 'Auto Update Timer' to update the list of items of a timer.</AutoUpdateToolTip>
+
+	<AutoUpdateTimeInterval>Auto Update Timer</AutoUpdateTimeInterval>
+
+	<!--Tab Labels-->
+	<TabAll>All</TabAll>
+	<TabFoods>Foods</TabFoods>
+	<TabManufactured>Manufactured</TabManufactured>
+	<TabRawResources>Raw Resources</TabRawResources>
+	<TabItems>Items</TabItems>
+
+	<TabWeapons>Weapons</TabWeapons>
+	<TabApparel>Apparel</TabApparel>
+	<TabBuildings>Buildings</TabBuildings>
+	<TabChunks>Chunks</TabChunks>
+	<TabCorpses>Corpses</TabCorpses>
+</LanguageData>

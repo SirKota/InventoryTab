@@ -72,6 +72,7 @@ namespace InventoryTab.Helpers
             if (Widgets.ButtonInvisible(inRect) == true) {
                 _window.Dirty();
             }
+            
         }
 
     }

@@ -34,21 +34,24 @@ namespace InventoryTab
         //-1 means the object is less then what it's being compared to
         // 0 means they are equal
         public int CompareTo(Slot other) {
-            if (thingInSlot.MarketValue > other.thingInSlot.MarketValue) {
+            if (thingInSlot.MarketValue < other.thingInSlot.MarketValue) {
                 return 1;
-            } else if (thingInSlot.MarketValue < other.thingInSlot.MarketValue) {
-                return -1;
             }
-
+            
+            if (thingInSlot.MarketValue > other.thingInSlot.MarketValue) {
+                return -1; 
+            }
+            /*
             //If things have the same market value sort based on name
-            if (thingInSlot.MarketValue == other.thingInSlot.MarketValue) {
+            if ((int)thingInSlot.MarketValue == (int)other.thingInSlot.MarketValue) {
                 //More corpse bullshit
                 if (thingInSlot.def.IsWithinCategory(ThingCategoryDefOf.Corpses) == true && other.thingInSlot.def.IsWithinCategory(ThingCategoryDefOf.Corpses) == true){
                     
                     Corpse a = thingInSlot as Corpse;
                     Corpse b = other.thingInSlot as Corpse;
                     
-                    if (a != null && b != null && a.InnerPawn.def.race.Humanlike == true && b.InnerPawn.def.race.Humanlike == true) {
+                    if (a != null && b != null && a.InnerPawn.def.race.Humanlike == true && b.InnerPawn.def.race.Humanlike == true)
+                    {
                         return string.Compare(a.InnerPawn.Label, b.InnerPawn.Label, StringComparison.CurrentCulture);
                     }
 
@@ -56,7 +59,7 @@ namespace InventoryTab
 
                 return string.Compare(thingInSlot.LabelNoCount, other.thingInSlot.LabelNoCount, StringComparison.CurrentCulture);
             }
-
+            */
             return 0;
         }
     }

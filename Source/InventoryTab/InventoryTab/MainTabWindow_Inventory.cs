@@ -13,7 +13,7 @@ using InventoryTab.Helpers;
 namespace InventoryTab{
     public class MainTabWindow_Inventory : MainTabWindow {
 
-        //This is used for convenience sake
+        //This is used for convenience’s sake
         public enum Tabs {
             All,
             Foods,
@@ -50,6 +50,8 @@ namespace InventoryTab{
 
         private List<Thing> _things;
         private List<Slot> _slots;
+        
+        private Dictionary<Thing, bool> _dropDownMenu = new Dictionary<Thing, bool>();
 
         private float _timer;
 
@@ -58,6 +60,8 @@ namespace InventoryTab{
         //A holder for all the options
         private OptionsHelper _options;
 
+        private int _extraSlots;
+        
         public MainTabWindow_Inventory() {
             this._options = new OptionsHelper(this);
         }
@@ -116,9 +120,15 @@ namespace InventoryTab{
         }
 
         public void UpdateThings() {
-            //Do an inital find of all the items on the map based on the options
             _things = ItemFinderHelper.GetAllMapItems(Find.CurrentMap, _options);
             _slots = SortSlotsWithCategory(CombineThings(_things.ToArray()), _currentTab);
+            
+            _dropDownMenu.Clear();
+            for (var i = 0; i < _slots.Count; i++)
+            {
+                _dropDownMenu.Add(_slots[i].thingInSlot, false);
+            }
+
             _dirty = false;
         }
 
@@ -191,20 +201,21 @@ namespace InventoryTab{
             //Draw the tabs, the last argument is how many rows you want
             TabDrawer.DrawTabs(tabRect, tabs, 2, 200);
         }
-
+ 
         private void DrawMainRect(Rect inRect, List<Slot> slots) {
             Rect mainRect = new Rect(inRect.x, inRect.y + 37f + (_slotHeight * 3), inRect.width, inRect.height - 37f);
             //Creats slots for all the items; combines, sorts into catergorys and checks for searches all in one line 
             List<Slot> categorizedSlots = GetSearchForList(slots);
+            
             //Sort based on market value
             categorizedSlots.Sort();
 
             //This is for the scrolling
-            Rect viewRect = new Rect(0, 0, mainRect.width - 16f, categorizedSlots.Count * _slotHeight + 6f + (_slotHeight * 3));
+            Rect viewRect = new Rect(0, 0, mainRect.width - 16f, (categorizedSlots.Count + _extraSlots) * _slotHeight + 6f + (_slotHeight * 3));
             Widgets.BeginScrollView(mainRect, ref _scrollPosition, viewRect);
             {
                 for (int i = 0; i < categorizedSlots.Count; i++) {
-                    Rect slotRect = new Rect(0, i * _slotHeight, viewRect.width, _slotHeight);
+                    Rect slotRect = new Rect(32, i * _slotHeight, viewRect.width - 32, _slotHeight);
 
                     //For every second slot hightlight it to make it a bit easier to see
                     if (i % 2 == 1) Widgets.DrawLightHighlight(slotRect);
@@ -222,7 +233,7 @@ namespace InventoryTab{
             Thing thing = slot.thingInSlot;
 
             //Draw the image of the thing
-            Rect imageRect = new Rect(0f, slotRect.y, 32f, 32f);
+            Rect imageRect = new Rect(slotRect.x, slotRect.y, 32f, 32f);
             Widgets.ThingIcon(imageRect, thing);
 
             Widgets.InfoCardButton(slotRect.x + imageRect.width + 5, slotRect.y, thing.def);
@@ -249,6 +260,16 @@ namespace InventoryTab{
             
             labelRect.x += 500;
             Widgets.Label(labelRect, thing.Label);
+
+            var rectDropDown = new Rect(0, slotRect.y - 3f, 32, 30);
+            if (Widgets.ButtonText(rectDropDown, ">") == true)
+            {
+                _dropDownMenu[slot.thingInSlot] = !_dropDownMenu[slot.thingInSlot];
+                _extraSlots = _dropDownMenu[slot.thingInSlot] ? slot.groupedThings.Count : -slot.groupedThings.Count;
+                Log.Message(_extraSlots);
+
+            }
+            
         }
 
         private void TabClick(Tabs tab) {
